@@ -1,0 +1,73 @@
+{% load static %}
+{% load bootstrap4 %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/registro.css' %}">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!doctype html>
+<!------ Include the above in your HEAD tag ---------->
+<head>
+<title> Iniciar sesion </title>
+
+</head>
+<body>
+
+    <div id="login">
+        <div class="container">
+
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                <img class="avatar" src="/static/img/solo.svg" alt="logo_de_mipio">
+                <img class="avatar2" src="/static/img/lema.svg" alt="logo_de_mipio">
+                    <div id="login-box" class="col-md-12">
+                    
+                        <form id="login-form" class="form" action="/confirmacionregistrocliente/" method="POST">{% csrf_token %}
+                        
+                            <h3 class="text-center text-warning">Formulario de registro</h3>
+                               
+                                 <input type="hidden" name="usuario" required="" id="id_usuario" value={{ user.id }}>
+                                  
+                                     <label for="ciudad" class="text-white">Ciudad:</label><br>
+                                       <select name="ciudad" class="form-control" required="" id="id_ciudad">
+                                         <option value="" selected="">---------</option>
+                                         <option value="1">villavicencio</option>
+                                         <option value="2">cumaral</option>
+                                         <option value="3">yopal</option>
+                                         <option value="4">restrepo</option>
+                                         <option value="5">paratebueno</option>
+                                         <option value="6">acacias</option>
+                                        </select>
+                                  
+                              
+                                <label for="id_direccion" class="text-white">Direccion:</label><br>
+                                <textarea name="direccion" class="form-control" cols="40" rows="10" maxlength="40" required="" id="id_direccion"></textarea>
+                                <div class="row">
+                                  <div class="col">
+                                     <label for="id_barrio" class="text-white">Barrio:</label>
+                                     <textarea name="barrio" class="form-control" cols="40" rows="10" maxlength="20" required="" id="id_barrio"></textarea>
+                                  </div>
+                                  <div class="col">
+                                      <label for="id_telefono" class="text-white">Telefono:</label><br>
+                                      <input type="tel" class="form-control" name="telefono" maxlength="10" required="" id="id_telefono">
+                                  </div>
+                               </div>
+                         
+                            <div id="boton" class="align-items-center">
+                             <div class="form-group">
+                                 <label for="remember-me" class="text-white"><span>recordar</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="Ingresar">
+                             </div>
+                            </div>
+                            <div id="register-link" class="text-right">
+                                <a href="/index" class="text-white">Iniciar sesion</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+ 
+    {% bootstrap_javascript jquery='full' %}
+</body>

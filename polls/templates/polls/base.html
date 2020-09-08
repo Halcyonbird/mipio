@@ -1,0 +1,68 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #383838;">
+  
+  <img src="/static/img/encabezado2.png"  class="nav-link dropdown-toggle img-fluid" height="100px"
+                                    width="110px"  href="/inicio/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false"></img>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">   
+      <li class="nav-item">
+        <a class="nav-link" href="/mispedidos">Mis Pedidos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/hacerpedido/">Hacer pedido</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cart/">Carrito de compras</a>
+      </li>         
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         {% if Tienda%}
+          <a class="dropdown-item" href="/mitienda">Mi tienda</a>
+          <a class="dropdown-item" href="/misproductos">Mis productos</a>
+          <a class="dropdown-item" href="/Gestorpedidos">Gestor de pedidos</a>
+         {% else %}
+           <a class="dropdown-item" href="/registrotienda/">Poner mi tienda</a>
+         {% endif %}
+          
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/Midireccion/">Mis datos</a>
+        </div>
+
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#"> </a>
+      </li>
+   
+    </ul>
+      
+  </div>
+   {% if user.is_authenticated %}
+     <li class="text-white">usuario: {{ user.get_username }}</li>
+     <li><a href="{% url 'logout'%}?next={{request.path}}">Salir</a></li>   
+   {% else %}
+     <li><a href="{% url 'login'%}?next={{request.path}}">Ingresar</a></li>   
+   {% endif %} 
+  </ul>
+</nav>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/sweetalert2.min.js' %}"></script>
+  <script src="{% static 'js/carrito.js' %}"></script>
+	<script src="{% static 'js/pedido.js' %}"></script>
+  
+{% block content %}
+{% endblock %}
+
+    
+    
+    
+    
+   

@@ -1,0 +1,27 @@
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<head> 
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <link rel="stylesheet" type="text/css" href="{% static 'css/generarpedido.css' %}">
+ <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<head/>
+
+
+
+<body> 
+ <div class="container">
+  <div class="alert alert-success" role="alert">
+   <h4 class="alert-heading">Tu producto ha sido agregado</h4>
+    <p>Gracias por usar mipip.app</p>
+     <hr>
+      <input type="submit" id="agregar" value="Pedir otro producto" class="btn btn-secondary" >
+      <input type="submit" id="agregar" value="volver a inicio" class="btn btn-danger" >
+  </div> 
+ </div>
+ {% endblock %}
+
+<body/>

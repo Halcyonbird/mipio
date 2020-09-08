@@ -1,0 +1,89 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<head>
+	<title>CRM</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main2.css' %}">
+
+ <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+ <!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+ <!--===============================================================================================-->    
+
+</head>
+
+<body>
+<br>
+
+
+	<div class="col-md-10" style="float:none;margin:auto;">
+      {{pk}}
+		<hr>
+		 <h5 class="card-title" center>Pedidos por confirmar</h5>
+		<div class="card card-body">
+			<a class="btn" href="{% url 'registrarproductos' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver</a>
+			
+			<table class="table table-sm">
+				<tr>
+					<th>Producto</th>
+					<th>Fecha de orden</th>
+					<th>Direccion</th>
+					<th>Estado</th>
+					<th>Cantidad</th>
+					<th></th>
+					<th></th>
+				</tr>
+			{% for item in pedido%}
+				{% for items in item.carritodecompra_set.all %}
+				
+				  {% if items.tienda == Tienda and items.estadoproducto.nombre == pk %}
+				    <th>Cliente: {{item.usuario.user.first_name}} {{item.usuario.user.last_name}}</th>
+					<tr>
+						<td>{{items.productoid.nombre}}</td>
+						<td>{{items.pedido.fecha}}</td>
+						<td>{{items.pedido.direccion.ciudad}}/{{items.pedido.direccion.barrio}}/{{items.pedido.direccion.direccion}}</td>
+						<td>{{items.estadoproducto}}</td>
+						<td>{{items.cantidad}}</td>
+						{{pk}}
+						{% if pk != "Entregado" %}
+						 <td><a class="btn" href="{% url 'confirmarpedido' items.id estado1 %}">
+						     <i class="fa fa-check-circle" aria-hidden="true">{{estado1}}</i>
+						 </a></td>
+						{% endif %}
+						<td><a class="btn" href="">
+						 <i class="fa fa-check-circle" aria-hidden="true">Cancelar</i>
+						</a></td>
+					</tr>
+		
+				  
+				  {% endif %}
+
+				{% empty %}
+				<tr>
+				</tr>
+				{% endfor %}
+			{% endfor %}
+
+		
+			</table>
+		</div>
+	</div>
+
+</div>
+</body>
+{% endblock %}

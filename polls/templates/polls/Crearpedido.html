@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+
+ {% block content %}
+   
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/resumen.css' %}">
+
+</head>
+<body>
+ 
+ <form action="/menuproducto/" method="POST"> {% csrf_token %}
+       <main>
+           <div class="container">
+              <div class="row mt-3">
+                  <div class="col">
+                      <h2 class="d-flex justify-content-center mb-3">Datos de pedido</h2>
+                      
+                          <div class="form-group row">
+                              
+                            
+                             
+                           <label for="cliente" class="col-12 col-md-2 col-form-label h2">Cliente :</label>
+                              <div class="col-12 col-md-10">
+                                  <input type="text" disabled  class="form-control" id="cliente"
+                                      value={{ user.first_name }}{{ user.last_name }} required> 
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                              <label for="email" name="email" class="col-12 col-md-2 col-form-label h2">Correo :</label>
+                              <div class="col-12 col-md-10">
+                                  <input type="email" disabled class="form-control" id="correo"
+                                  value={{ user.email }} required>
+                              </div>
+                          </div>
+                      <form id="procesar-pago" action="registropedido/" method="POST">
+                            <div class="col-12 col-md-10">
+                                  <input type="number" hidden class="form-control" name="cliente" id="cliente" value={{ user.id }} required> 
+                            </div> 
+                           <div class="form-group">
+                             <label for="inputAddress">Barrio</label>
+                             <input type="text" name="barrio" class="form-control"  placeholder="ejemplo: centro">
+                          </div>
+                          <label for="inputAddress">ciudad </label>
+                          <div class="input-group mb-3">
+                          
+                            <div class="input-group-prepend">  
+                                
+                              </div>
+                               <select class="custom-select" name="ciudad" id="inputGroupSelect01">
+                               <option selected>Escoger...</option>
+                               <option value="1">villavicencio</option>
+                               <option value="2">cumaral</option>
+                               <option value="3">yopal</option>
+                               <option value="4">restrepo</option>
+                               <option value="5">paratebueno</option>
+                               <option value="6">acacias</option>
+                             </select>
+                          </div> 
+
+                         
+
+                          <div class="form-group">
+                             <label for="inputAddress">Direccion</label>
+                             <input type="text" name="direccion_pedido" class="form-control" id="inputAddress" placeholder="calle 15 #20-50">
+                          </div>
+
+                          <div class="row justify-content-between">
+                              <div class="col-md-4 mb-2">
+                                  <a href="/inicio" class="btn btn-info btn-block">cancelar</a>
+                              </div>
+                              <div class="col-xs-12 col-md-4">
+                               <input type="submit" id="agregar" value="Seguir" class="btn btn-info btn-block" >
+                              </div>
+                          </div>
+                      </form>
+
+
+                  </div>
+
+
+              </div>
+
+          </div>
+      </main>
+
+
+
+
+
+    </FORM>
+
+    
+    
+
+    
+</body>
+{% endblock %}
+</html>

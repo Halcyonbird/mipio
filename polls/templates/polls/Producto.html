@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Producto.css' %}">
+	
+    <script src="/static/js/jquery-3.2.1.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/bootstrap-input-spinner.js"></script>
+
+  
+</head>
+<body>
+ {% for model2 in model2 %}
+  <style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		
+	}
+  </style>
+  <div class="wrap" id="wrap">
+		
+        <div class="row">
+	<div class="col-md-3">
+		<div class="card card-body">
+		 
+			<a class="btn" href="/hacerpedido/"> &#8592; Regresar</a>
+			<hr>
+			<h3 style="text-align: center" id="nombre">{{model2.nombre}}</h3>
+			<hr>
+			<img class="profile-pic" id="imagen" src="/media/{{model2.imagen}}" >
+			<hr>
+			<h3 style="text-align: center" id="precio">{{model2.precio}} $</h3>
+		  
+		
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="card card-body">
+		  
+			<hr>
+			<h3 style="text-align: center">Cantidad</h3>
+			<hr>
+			<form method="POST" action="/agregaralcarrito/">{% csrf_token %}
+			<input type="hidden" name="productoid" required="" id="id_productoid" value="{{model2.id}}">
+			<input type="number" class="form-control" id="cantidad" name="cantidad">
+			<input type="hidden" name="usuario" required="" id="id_productoid" value={{ user.id }}>
+			<hr>
+			<button type="submit" id="agregar" class="btn btn-block">Agregar</button>
+			</form>
+			<hr>
+			 
+			
+			
+		 
+		
+         
+			
+			
+		</div>
+	</div>
+		</div>
+	</div>
+</div>
+		
+  <script>
+        $("input[type='number']").inputSpinner()
+  </script>
+
+  
+       
+  
+  
+ {% endfor %}
+    
+ {% bootstrap_javascript jquery='full' %}
+</body>
+{% endblock %}
+</html>

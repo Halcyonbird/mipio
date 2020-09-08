@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+
+
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gestor pedidos</title>
+ <!--BOOTSTRAP 4-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="/static/js/jquery-3.2.1.js"></script>
+	<script src="/static/js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main2.css' %}">
+
+
+ <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+ <!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+ <!--===============================================================================================-->    
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #383838;">
+  
+  <img src="/static/img/encabezado2.png"  class="nav-link dropdown-toggle img-fluid" height="100px"
+                                    width="110px"  href="/inicio/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false"></img>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">   
+      <li class="nav-item">
+        <a class="nav-link" href="/mispedidos">Mis Pedidos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/hacerpedido/">Hacer pedido</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cart/">Carrito de compras</a>
+      </li>         
+
+
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#"> </a>
+      </li>
+   
+    </ul>
+      
+  </div>
+   {% if user.is_authenticated %}
+     <li class="text-white">usuario: {{ user.get_username }}</li>
+     <li><a href="{% url 'logout'%}?next={{request.path}}">Salir</a></li>   
+   {% else %}
+     <li><a href="{% url 'login'%}?next={{request.path}}">Ingresar</a></li>   
+   {% endif %} 
+  </ul>
+ </nav>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/sweetalert2.min.js' %}"></script>
+  <script src="{% static 'js/carrito.js' %}"></script>
+	<script src="{% static 'js/pedido.js' %}"></script>
+
+
+ <br>
+
+ <div class="row">
+ 
+ 	 <div class="col">
+ 		 <div class="col-md">
+			 <div class="card text-center text-white  mb-3" id="total-orders" >
+			  	 <div class="card-header">
+			  		 <h5 class="card-title">Realizados</h5>
+			  	 </div>
+			  	 <div class="card-body">
+			    	 <h3 class="card-title">
+                       {{entregados}}
+					 </h3>
+			  	 </div>
+			  	 <div class="card-body">
+						 <td><a class="btn"  href={% url 'Listapedidos' estado3 %} disabled>
+						  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+						 </a></td>
+			  	 </div>
+			 </div>
+		 </div>
+	 </div>
+	 <div class="col">
+		 <div class="col-md">
+			 <div class="card text-center text-white  mb-3" id="orders-pending">
+			   	 <div class="card-header">
+			  		 <h5 class="card-title">Pendientes</h5>
+			  	 </div>
+			  	 <div class="card-body">
+			    	 <h3 class="card-title">{{pendientes}}</h3>
+			  	 </div>
+			  	 <div class="card-body">
+						 <td><a class="btn" href="{% url 'Listapedidos' estado5 %}">
+						  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+						 </a></td>
+			  	 </div>
+			 </div>
+		 </div>
+	 </div>
+	 <div class="col">
+		 <div class="col-md">
+			 <div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	 <div class="card-header">
+			  		 <h5 class="card-title">Por enviar</h5>
+			  	 </div>
+			   	 <div class="card-body">
+			    	 <h3 class="card-title">{{confirmado}}</h3>
+			  	 </div>
+			  	 <div class="card-body">
+						 <td><a class="btn" href={% url 'Listapedidos' estado1 %}>
+						  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+						 </a></td>
+			  	 </div>
+			 </div>
+		 </div>
+	 </div>
+
+	 <div class="col">
+		 <div class="col-md">
+			 <div class="card text-center text-white  mb-3" id="orders-send">
+			   	 <div class="card-header">
+			  		 <h5 class="card-title">En camino</h5>
+			  	 </div>
+			  	 <div class="card-body">
+			    	 <h3 class="card-title">{{encamino}}</h3>
+			  	 </div>
+			  	 <div class="card-body">
+						 <td><a class="btn" href="{% url 'Listapedidos' estado2 %}">
+						  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+						 </a></td>
+			  	 </div>
+			 </div>
+		 </div>
+	 </div>
+
+
+ </div>
+ <br>
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<head> 
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <link rel="stylesheet" type="text/css" href="{% static 'css/logged_out.css' %}">
+ <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<head/>
+
+
+
+<body> 
+ <div class="container">
+  <div class="alert alert-warning" role="alert">
+   <h4 class="alert-heading">Sesión finalizada</h4>
+    <p>Gracias por usar mipip.app</p>
+     <hr>
+      <a href="{% url 'login'%}">Click aqui para ingresar de nuevo.</a>
+  </div> 
+ </div>
+ {% endblock %}
+
+<body/>

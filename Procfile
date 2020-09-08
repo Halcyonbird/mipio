@@ -1,0 +1,1 @@
+web: gunicorn mipio.wsgi --log-file -

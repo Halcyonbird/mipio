@@ -1,0 +1,134 @@
+{% load static %}
+{% load bootstrap4 %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!doctype html>
+<!------ Include the above in your HEAD tag ---------->
+<head>
+ <title> Personalizacion </title>
+ 	<title>Personalizacion</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+ <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'midireccion/images/icons/favicon.ico' %}"/>
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'midireccion/vendor/bootstrap/css/bootstrap.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'midireccion/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'midireccion/vendor/animate/animate.css' %}">
+ <!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'midireccion/vendor/css-hamburgers/hamburgers.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'midireccion/vendor/select2/select2.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'midireccion/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'midireccion/css/main.css' %}">
+ <!--===============================================================================================-->
+</head>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="alert alert-warning"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+  
+<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+			
+				<form action="" enctype="multipart/form-data" method="POST">{% csrf_token %}
+				  {{Tienda}}
+				   {% if request.POST.ID %}
+					  <span class="login100-form-title">
+					      Modificiar producto
+					  </span>
+				   {% else %}
+					  <span class="login100-form-title">
+					      Registrar producto
+					  </span>				   
+				   {% endif %}
+					<div class="wrap-input100 validate-input" data-validate = "caracter no permetido">
+					   {{form.nombre}}
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-map-signs" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "caracter no permetido">
+					   <input type="file" class="input100" name="imagen" required="" id="id_imagen">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-map-marker" aria-hidden="true"></i>
+						</span>
+					</div>		
+
+					<div class="wrap-input100 validate-input" data-validate = "caracter no permetido">
+					   {{form.precio}}
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-mobile" aria-hidden="true"></i>
+						</span>
+					</div>	
+
+					<div class="wrap-input100 validate-input" data-validate = "caracter no permetido">
+					   {{form.categoria}}
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-road" aria-hidden="true"></i>
+						</span>
+					</div>	
+                   
+
+                  {% if messages %}
+                     <ul class="messages">
+                          {% for message in messages %}
+                             <li{% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</li>
+                          {% endfor %}
+                     </ul>
+                  {% endif %}
+
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Crear
+						</button>
+					</div>
+
+                </form>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="/inicio">
+							Volver
+							<i class="fa fa-arrow-left" aria-hidden="true"></i>
+						</a>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+
+  <!--===============================================================================================-->	
+	<script src="/static/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+	<script src="/static/login/vendor/bootstrap/js/popper.js"></script>
+	<script src="/static/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!--===============================================================================================-->
+	<script src="/static/login/vendor/select2/select2.min.js"></script>
+  <!--===============================================================================================-->
+	<script src="/static/login/vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+  <!--===============================================================================================-->
+	<script src="js/main.js"></script>
+    {% bootstrap_javascript jquery='full' %}
+</body>

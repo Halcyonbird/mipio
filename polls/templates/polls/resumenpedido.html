@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+
+ {% block content %}
+   
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/resumen.css' %}">
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/satic/js/carrito.js"></script>
+    <script src="/static/js/compra.js"></script>
+</head>
+<body>
+ <form action="/generarpedido/" method="GET"
+ {% csrf_token %}
+    <main>
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col">
+                    <h2 class="d-flex justify-content-center mb-3">Datos de pedido</h2>
+                    <form id="procesar-pago" action="registropedido" method="POST">
+                        <div class="form-group row">
+                            <label for="cliente" class="col-12 col-md-2 col-form-label h2">Id Cliente :</label>
+                            
+                            <div class="col-12 col-md-10">
+                                <input type="text" disabled class="form-control" name=cliente id="cliente"
+                                 value={{ user.id }} required> 
+                            </div>
+                         <label for="cliente" class="col-12 col-md-2 col-form-label h2">Cliente :</label>
+                            <div class="col-12 col-md-10">
+                                <input type="text" disabled class="form-control" id="cliente"
+                                    value={{ user.first_name }}{{ user.last_name }} required> 
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-12 col-md-2 col-form-label h2">Correo :</label>
+                            <div class="col-12 col-md-10">
+                                <input type="email" disabled class="form-control" id="correo"
+                                value={{ user.email }} required>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <label class="input-group-text" for="inputGroupSelect01">Ciudad:</label>
+                           </div>
+                           <select class="custom-select" id="inputGroupSelect01">
+                             <option selected>Escoger...</option>
+                             <option value="1">villavicencio</option>
+                             <option value="2">cumaral</option>
+                             <option value="3">yopal</option>
+                             <option value="4">restrepo</option>
+                             <option value="5">paratebueno</option>
+                             <option value="6">acacias</option>
+                           </select>
+                        </div>
+
+                        <div id="carrito" class="table table-bordered"">
+                            <table class="table" id="lista-compra">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id producto</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Libras</th>
+                                        <th scope="col">Sub Total</th>
+                                        <th scope="col">Eliminar</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                                {% if request.GET.pollo != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id1}}</td>
+                                   <td>pollo</td>
+                                   <td> 6000</td>
+                                   <td>{{request.GET.pollo}}</td>
+                                   <td class="total"></td>
+                                   </tr>
+
+                                   
+                                {% endif %}
+
+                                {% if request.GET.pechuga != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id2}}</td>
+                                   <td>Pechuga</td>
+                                   <td>8200</td>
+                                   <td>{{request.GET.pechuga}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                {% if request.GET.pernil != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id3}}</td>
+                                   <td>Pernil</td>
+                                   <td>6200</td>
+                                   <td>{{request.GET.pernil}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                {% if request.GET.alas != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id4}}</td>
+                                   <td>alas</td>
+                                   <td>6000</td>
+                                   <td>{{request.GET.alas}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                {% if request.GET.menudencias != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id5}}</td>
+                                   <td>menudencia</td>
+                                   <td>1800</td>
+                                   <td>{{request.GET.menudencias}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                {% if request.GET.colombinas != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id6}}</td>
+                                   <td>colombinas</td>
+                                   <td>7800</td>
+                                   <td>{{request.GET.colombinas}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                {% if request.GET.corazones != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id7}}</td>
+                                   <td>corazones</td>
+                                   <td>4800</td>
+                                   <td>{{request.GET.corazones}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                {% if request.GET.cuadritos != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id8}}</td>
+                                   <td>cuadritos</td>
+                                   <td>6200</td>
+                                   <td>{{request.GET.cuadritos}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                {% if request.GET.rabadilla != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id9}}</td>
+                                   <td>rabadilla</td>
+                                   <td>6200</td>
+                                   <td>{{request.GET.rabadilla}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                {% if request.GET.mollejas != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id10}}</td>
+                                   <td>mollejas</td>
+                                   <td>7000</td>
+                                   <td>{{request.GET.mollejas}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                {% if request.GET.patas != '0' %}
+                                   <tr>
+                                   <td>{{request.GET.Id11}}</td>
+                                   <td>patas</td>
+                                   <td>6200</td>
+                                   <td>{{request.GET.patas}}</td>
+                                   </tr>
+                                {% endif %}
+
+                                
+                                
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-right">SUB TOTAL :</th>
+                                    <th scope="col">
+                                        <p id="subtotal"></p>
+                                    </th>
+                                    <!-- <th scope="col"></th> -->
+                                </tr>
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-right">IGV :</th>
+                                    <th scope="col">
+                                        <p id="igv"></p>
+                                    </th>
+                                    <!-- <th scope="col"></th> -->
+                                </tr>
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-right">TOTAL :</th>
+                                    <th scope="col">
+                                        <p id="total"></p>
+                                    </th>
+                                    <!-- <th scope="col"></th> -->
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+
+                        <div class="row justify-content-center" id="loaders">
+                            <img id="cargando" src="img/cargando.gif" width="220">
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-md-4 mb-2">
+                                <a href="/pedido" class="btn btn-info btn-block">Seguir comprando</a>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <input type="submit" id="boton" value="Hacer pedido">
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </main>
+
+
+
+
+
+    </div>
+
+    
+    
+
+    
+</body>
+{% endblock %}
+</html>

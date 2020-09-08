@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+
+
+
+   
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pedido.css' %}">
+	
+    <script src="/static/js/jquery-3.2.1.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/bootstrap-input-spinner.js"></script>
+	
+  
+</head>
+<body>
+   
+
+
+  <div class="wrap">
+		<h1>Pruductos:</h1>
+		<div class="store-wrapper">
+			<div class="category_list">
+				<a href="#" class="category_item" category="all">Todo</a>
+				<a href="#" class="category_item" category="partes">partes</a>
+				<a href="#" class="category_item" category="menudencias">menudencias</a>
+				<form action="/inicio/" method="GET" href="/inicio">
+				 <input type="submit" id="agregar" value="Cancelar" class="btn btn-danger" >
+				</form>
+			
+               
+			</div>
+		
+
+			<section class="products-list">
+				<div class="product-item" category="laptops">
+					<img src="/static/img/pollo.png" alt="" >
+					<a>Pollo entero</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Pollo'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+				<div class="product-item" category="partes">
+					<img src="/static/img/pechuga.png" alt="" >
+					<a>Pechuga</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Pechuga'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+				<div class="product-item" category="partes">
+					<img src="/static/img/pernil.png" alt="" >
+					<a>Pernil</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Pernil'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+				<div class="product-item" category="partes">
+					<img src="/static/img/ala.png" alt="" >
+					<a>alas</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Alas'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+				<div class="product-item" category="menudencias">
+					<img src="/static/img/md.png" alt="" >
+					<a>Menudencia</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Menudencias'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+				<div class="product-item" category="partes">
+					<img src="/static/img/colombina.png" alt="" >
+					<a>Colombinas</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Colombinas'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+				<div class="product-item" category="menudencias">
+					<img src="/static/img/corazon.png" alt="" >
+					<a>corazones</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Corazones'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+				<div class="product-item" category="partes">
+					<img src="/static/img/cuadrito.png" alt="" >
+					<a>Cuadritos</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Cuadritos'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+        <div class="product-item" category="partes">
+					<img src="/static/img/rabadilla.png" alt="" >
+					<a>rabadilla</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Rabadillas'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+        <div class="product-item" category="menudencias">
+					<img src="/static/img/mollejas.png" alt="" >
+					<a>mollejas</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Mollejas'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+				</div>
+        <div class="product-item" category="menudencias">
+					<img src="/static/img/patas.png" alt="" >
+					<a>patas</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Patas'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					 <button type="submit" id="agregar" class="btn">agregar</button>
+					</form>
+			    </div>
+				
+			</section>
+
+			
+			
+		</div>
+	</div>
+  <script>
+        $("input[type='number']").inputSpinner()
+  </script>
+  
+       
+  
+  
+
+    
+ {% bootstrap_javascript jquery='full' %}
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+
+   
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/carrito.css' %}">
+	
+    <script src="/static/js/jquery-3.2.1.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="static/js/carrito.js"></script>
+ <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'registrotienda/images/icons/favicon.ico' %}"/>
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/vendor/bootstrap/css/bootstrap.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/vendor/animate/animate.css' %}">
+ <!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/vendor/css-hamburgers/hamburgers.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/vendor/select2/select2.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/css/main.css' %}">
+ <!--===============================================================================================-->		
+ 
+  
+</head>
+
+<body>
+ 
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="alert alert-warning"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %} 
+	{% if Tienda != None %}
+	<div class="row" align="center" >
+		<div class="col-lg-10" >
+			<div class="box-element" >
+                
+				<a  class="btn " href="{% url 'hacerpedido' %}">&#x2190; Volver</a>
+
+				<br>
+				<br>
+				<table class="table">
+					<tr>
+						<h5><strong>{{Tienda.nombre}}</strong></h5>
+						<img class="profile-pic" height="150px" src="/media/{{Tienda.imagen}}" >	
+					</tr>
+
+				</table>
+				<div class="cart-row">
+				   <div style="flex:1"><strong></strong></div>
+				   <div style="flex:1"><strong></strong></div>
+				   <div style="flex:1"><strong><a class="btn btn-sm " href="/registrarproductos/">Agregar producto</a>	</strong></div>
+					
+				</div>
+			</div>
+			<br>
+			<div class="box-element">
+			    
+				<div class="cart-row">
+					<div style="flex:1"><strong >Cantidad de productos: {{Tienda.product_set.all.count}}</strong></div>
+				</div>
+				<div class="cart-row">
+					<div style="flex:1"><strong>Nombre</strong></div>
+					<div style="flex:1"><strong>Precio</strong></div>
+					<div style="flex:1"><strong>Categoria</strong></div>
+					<div style="flex:1"><strong></strong></div>
+					<div style="flex:1"><strong></strong></div>
+
+				</div>				
+			 
+				  {% for items in Tienda.product_set.all %}
+				     <div class="cart-row">
+					     <div style="flex:1">
+					         <div style="flex:1">{{items.nombre}}</div>
+					         <div style="flex:1" class="img"><img class="row-image" src="/media/{{items.imagen}}"></div>
+					     </div>
+					     <div style="flex:1">{{items.precio}}</div>
+					     <div style="flex:1">{{items.categoria}}</div>
+					     <div style="flex:1">
+                              <a class="btn btn-sm " href="{% url 'eliminarproductos' items.id %}">Eliminar</a>
+					     </div>
+					     <div style="flex:1">
+                              <a class="btn btn-sm " href="{% url 'editarproductos' items.id %}">Modificar</a>
+					     </div>
+
+				
+				        </div>
+				   {% endfor %}
+				
+			</div>
+			
+		</div>
+	</div>
+	{% else %}
+	<h1 style="text-align:center;padding: 100px">No tienes pedidos realizados</h1>
+	{% endif %}
+</body>
+
+</html>

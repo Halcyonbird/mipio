@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Formulario_pedido.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/stars.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/static/js/jquery-3.2.1.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/bootstrap-input-spinner.js"></script>
+	<script src="static/js/carrito.js"></script>
+	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+	
+  
+</head>
+{% if fondo %}
+<body style="background-image: url(/media/{{fondo.fondo}});">
+{% else %}
+<body style="body{
+	background: rgb(237,241,248);
+
+}
+.card{
+	background-color: ffff;
+	border-color: ffff;
+}">
+{% endif %}
+
+  <style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		
+	}
+
+  </style>
+  <div class="wrap">
+		<h1>Bienvenido a {{request.GET.nombre}} </h1>
+        <div class="row">
+	<div class="col-md-3">
+		<div class="card card-body">
+			<a class="btn " href="/inicio">Regresar</a>
+			<img class="profile-pic" src="/media/{{request.GET.imagen}}" >
+
+		
+		</div>
+
+	    <div class="card card-body">
+		 <div id="full-stars-example">
+              <div class="rating-group">
+                 <input class="rating__input rating__input--none" name="rating" id="rating-none" value="0" type="radio">
+                 <label aria-label="No rating" class="rating__label" for="rating-none"><i class="rating__icon rating__icon--none fa fa-ban"></i></label>
+                 <label aria-label="1 star" class="rating__label" for="rating-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                 <input class="rating__input" name="rating" id="rating-1" value="1" type="radio">
+                 <label aria-label="2 stars" class="rating__label" for="rating-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                 <input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
+                 <label aria-label="3 stars" class="rating__label" for="rating-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                 <input class="rating__input" name="rating" id="rating-3" value="3" type="radio" checked>
+                 <label aria-label="4 stars" class="rating__label" for="rating-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                 <input class="rating__input" name="rating" id="rating-4" value="4" type="radio">
+                 <label aria-label="5 stars" class="rating__label" for="rating-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                 <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
+               </div>
+               <p class="desc" style="margin-bottom: 2rem; font-family: sans-serif; font-size:0.9rem">Full stars<br/>'No rating' option</p>
+          </div>
+		
+		</div>
+		
+		
+	</div>
+	
+	<div class="col-md-9">
+		<div class="card card-body">
+			
+		<div class="store-wrapper">
+		 
+			<div class="category_list">
+			 <a href="#" class="category_item" category="all">Todo</a>
+			 {% for model3 in model3 %}
+				 <a href="#" class="category_item" category="{{model3.nombre}}">{{model3.nombre}}</a>
+			 {% endfor %}
+
+			
+               
+			</div>
+		  
+
+			<section class="products-list">
+			 
+			 {% for model2 in model2 %}
+				<div class="product-item" category="{{model2.categoria}}">
+					<img class="img-responsive" src="/media/{{model2.imagen}}" height="200px" alt="" >
+					<a>{{model2.nombre}}</a>
+					<form action="/Vistaproducto/" method="GET">
+					<input type="hidden" name='id' value={{model2.id}}>
+
+					 
+					 <button type="submit" id="agregar" class="btn">Pedir</button>
+					</form>
+				</div>
+			 {% endfor %}	
+			</section>
+            
+			
+			
+			
+		</div>
+		
+
+
+
+
+	</div>
+
+	 <div class="card card-body">
+      <div class="col-md-12">
+                <div class="product-tab">
+                    <ul class="tab-nav">
+                        <li class="active"><a data-toggle="tab" href="#tab1">Details</a></li>
+                        <li><a data-toggle="tab" href="#tab2">Reviews ({{ product.countreview}} )</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade in active">
+                            <p>
+                                {{ product.detail |safe }}
+                            </p>
+                        </div>
+                        <div id="tab2" class="tab-pane fade in">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="product-reviews">
+                                        {% for rs in comments %}
+                                            <div class="single-review">
+                                                <div class="review-heading">
+                                                    <div><a href="#"><i class="fa fa-user-o"></i> {{ rs.user.first_name }}</a> </div>
+                                                    <div><b>{{ rs.subject }}</b> </div>
+                                                    <div><a href="#"><i class="fa fa-clock-o"></i> {{ rs.create_at}}</a></div>
+
+                                                    <div class="review-rating pull-right">
+                                                        <i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
+                                                        <i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>
+                                                        <i class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></i>
+                                                        <i class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></i>
+                                                        <i class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>{{ rs.comment }}</p>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <ul class="reviews-pages">
+                                            <li class="active">1</li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="text-uppercase">Write Your Review</h4>
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert alert-{{message.tags}}" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <form class="review-form" action="/product/addcomment/{{ product.id }}" method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input name="subject" class="input" type="text" placeholder="Your subject" />
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="comment" class="input" placeholder="Your review"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-rating">
+                                                <strong class="text-uppercase">Your Rating: </strong>
+                                                <div class="stars">
+                                                    <input type="radio" id="star5" name="rate" value="5" /><label for="star5"></label>
+                                                    <input type="radio" id="star4" name="rate" value="4" /><label for="star4"></label>
+                                                    <input type="radio" id="star3" name="rate" value="3" /><label for="star3"></label>
+                                                    <input type="radio" id="star2" name="rate" value="2" /><label for="star2"></label>
+                                                    <input type="radio" id="star1" name="rate" value="1" /><label for="star1"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if user.id is not None %}
+                                            <button class="primary-btn">Submit</button>
+                                        {% else %}
+                                            You must be logged in to post a review
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+	 </div>
+		</div>
+	</div>
+</div>
+		
+  <script>
+        $("input[type='number']").inputSpinner()
+  </script>
+  
+       
+  
+  
+
+    
+ {% bootstrap_javascript jquery='full' %}
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,76 @@
+{% load static %}
+{% load bootstrap4 %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/registro.css' %}">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!doctype html>
+<!------ Include the above in your HEAD tag ---------->
+<head>
+<title> Iniciar sesion </title>
+
+</head>
+<body>
+
+    <div id="login">
+        <div class="container">
+
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                <img class="avatar" src="/static/img/solo.svg" alt="logo_de_mipio">
+                <img class="avatar2" src="/static/img/lema.svg" alt="logo_de_mipio">
+                    <div id="login-box" class="col-md-12">
+                    
+                        <form id="login-form" class="form" action="/confirmacionregistro/" method="POST">{% csrf_token %}
+                        
+                            <h3 class="text-center text-warning">Formulario de registro</h3>
+                              
+                                <div class="row">
+                                  <div class="col">
+                                     <label for="username" class="text-white">Usuario:</label><br>
+                                      <input type="text" name="username" class="form-control" maxlength="150" autofocus="" required="" id="id_username">
+                                  </div>
+                                  <div class="col">
+                                     <label for="password" class="text-white">Contraseña:</label><br>
+                                     <input type="password" name="password1" class="form-control" autocomplete="new-password" required="" id="id_password1">
+                                  </div>
+                               </div>
+                                <label for="password" class="text-white">Confirmar contraseña:</label><br>
+                                <input type="password" name="password2"  class="form-control" autocomplete="new-password" required="" id="id_password2">
+                                <div class="row">
+                                  <div class="col">
+                                     <label for="first_name" class="text-white">nombres:</label><br>
+                                     <input type="text" name="first_name" class="form-control" maxlength="30" id="id_first_name">
+                                  </div>
+                                  <div class="col">
+                                      <label for="last_name" class="text-white">apellidos:</label><br>
+                                      <input type="text" name="last_name" id="last_name" class="form-control">
+                                  </div>
+                               </div>
+ 
+
+                             <div class="form-group">
+                                 <label for="email" class="text-white">correo:</label><br>
+                                 <input type="email" name="email" id="email" class="form-control">
+                             </div>
+
+                         
+                            <div id="boton" class="align-items-center">
+                             <div class="form-group">
+                                 <label for="remember-me" class="text-white"><span>recordar</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="Ingresar">
+                             </div>
+                            </div>
+                            <div id="register-link" class="text-right">
+                                <a href="/index" class="text-white">Iniciar sesion</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+ 
+    {% bootstrap_javascript jquery='full' %}
+</body>

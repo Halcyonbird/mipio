@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+   
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pedido.css' %}">
+	
+    <script src="/static/js/jquery-3.2.1.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/bootstrap-input-spinner.js"></script>
+	
+	
+  
+</head>
+<body>
+
+   <br>
+  <div class="wrap">
+
+		<div class="store-wrapper">
+			<div class="category_list">
+			 <a href="#" class="category_item" category="all">Todo</a>
+			 {% for model2 in model2 %}
+				 <a href="#" class="category_item" category="{{model2.nombre}}">{{model2.nombre}}</a>
+			 {% endfor %}
+				<a class="btn "  id="boton-cancelar" href="/inicio">Regresar</a>
+			
+               
+			</div>
+		   
+		   
+
+			<section class="products-list">
+			 {% for model in model %}
+				<div class="product-item" category="{{model.categoria}}">
+					<img class="img-responsive" src="/media/{{model.imagen}}" height="200px" alt="" >
+					<a>{{model.nombre}}</a>
+					<form action="/Menuproductos/" method="GET">
+					 <input type="hidden" name='nombre' value="{{model.nombre}}">
+					 <input type="hidden" name='imagen' value="{{model.imagen}}">
+					 <input type="hidden" name='usuario' value="{{model.usuario}}">
+					 
+					 <button type="submit" id="agregar" class="btn">Entrar</button>
+					</form>
+				</div>
+			 {% endfor %}	
+			</section>
+         
+			
+			
+		</div>
+	</div>
+
+
+  
+  <script>
+        $("input[type='number']").inputSpinner()
+  </script>
+  
+       
+  
+  
+
+    
+ {% bootstrap_javascript jquery='full' %}
+</body>
+{% endblock %}
+</html>

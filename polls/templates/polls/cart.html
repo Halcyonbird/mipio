@@ -1,0 +1,142 @@
+{% load static %}
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/carrito.css' %}">
+	
+    <script src="/static/js/jquery-3.2.1.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="static/js/carrito.js"></script>
+ <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'registrotienda/images/icons/favicon.ico' %}"/>
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/vendor/bootstrap/css/bootstrap.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/vendor/animate/animate.css' %}">
+ <!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/vendor/css-hamburgers/hamburgers.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/vendor/select2/select2.min.css' %}">
+ <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'registrotienda/css/main.css' %}">
+ <!--===============================================================================================-->	
+	
+  
+</head>
+
+
+
+
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="alert alert-warning"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %} 
+	{% if pedido != None %}
+	<div class="row" align="center" >
+		<div class="col-lg-10" >
+			<div class="box-element" >
+                
+				<a  class="btn btn-outline-dark" href="{% url 'hacerpedido' %}">&#x2190; Agregar producto</a>
+
+				<br>
+				<br>
+				<table class="table">
+					<tr>
+						<th><h5>Items: <strong>{{pedido.get_cart_items}}</strong></h5></th>
+						<th><h5>Total:<strong> ${{pedido.get_cart_total|floatformat:2}}</strong></h5></th>
+						<th>
+						   {% if pedido.carritodecompra_set.all %}
+						     {% if direccion %}
+						          <form method="POST" action="/Pedir/">{% csrf_token %}
+						                <input type="hidden" name="pedidoid" required="" id="id_productoid" value="{{pedido.id}}">
+						                <button type="submit" id="agregar" style="float:right; margin:5px;" class="btn btn-sm">Confirmar pedido</button>
+							      </form>
+							   {% endif %}	 
+						   {% endif %}
+						</th>
+
+					</tr>
+				</table>
+
+			</div>
+				<br>
+			<div class="box-element" >
+				<table class="table">
+					<tr> 
+					 {% if direccion %}
+						<th><h5>direccion: <strong> {{direccion.direccion}} / {{direccion.barrio}} / {{direccion.ciudad}}</strong></h5></th>
+					 {% else %}
+					    <th><h5><strong>Agrega una direccion para poder seguir</strong></h5></th>
+					 {% endif %}
+						<th>
+						   {% if direccion %}
+						      <form method="POST" action="/Midireccion/">{% csrf_token %}
+						         <button type="submit" id="agregar" style="float:right; margin:5px;" class="btn btn-sm">Modificar</button>
+							  </form>
+						   {% else %}
+						      <form method="POST" action="/Midireccion/">{% csrf_token %}
+						         <button type="submit" id="agregar" style="float:right; margin:5px;" class="btn btn-sm">Añadir</button>
+							  </form>						     
+
+						   {% endif %}
+						</th>						
+					</tr>
+
+					
+				</table>
+
+			</div>
+
+			<br>
+			<div class="box-element">
+				<div class="cart-row">
+					<div style="flex:1"><strong>Articulo</strong></div>
+					<div style="flex:1"><strong>Precio</strong></div>
+					<div style="flex:1"><strong>cantidad</strong></div>
+					<div style="flex:1"><strong>Total</strong></div>
+					<div style="flex:1"><strong>Remover</strong></div>
+
+				</div>
+			
+				{% for item in pedido.carritodecompra_set.all %}
+				<div class="cart-row">
+
+					<div style="flex:1">
+					 <div style="flex:1">{{item.productoid.nombre}}</div>
+					 <div style="flex:1" class="img"><img class="row-image" src="/media/{{item.productoid.imagen}}"></div>
+					</div>
+					
+					<div style="flex:1">${{item.productoid.precio|floatformat:2}}</div>
+					<div style="flex:1">{{item.cantidad}}</div>
+					<div style="flex:1"><p>${{item.get_total}}</p></div>
+					<div style="flex:1">
+					 <form method="POST" action="/eliminaritem/">{% csrf_token %}
+					      <input type="hidden" name="carritoid" required="" id="id_productoid" value="{{item.id}}">
+						  <button type="submit" id="agregar" class="btn btn-sm">Remover</button>
+						</form>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% else %}
+	<h1 style="text-align:center;padding: 100px">No Items in cart</h1>
+	{% endif %}
+</body>
+

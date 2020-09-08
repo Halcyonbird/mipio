@@ -1,0 +1,52 @@
+{% load static %}
+{% load bootstrap4 %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!doctype html>
+<!------ Include the above in your HEAD tag ---------->
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+	
+    <script src="/static/js/jquery-3.2.1.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/bootstrap-input-spinner.js"></script>
+	
+  
+</head>
+<body>
+ 
+ <div class="wrap">
+     <h3>registrate como:</h3>
+     <div class="store-wrapper">
+         <section class="products-list">
+
+          <div class="product-item" category="laptops">
+					<img src="/static/img/Artboard 2.png" alt="" >
+					<a href="/registrocliente/">comprador</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Pollo'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+					</form>
+		  </div>
+          <div class="product-item" category="laptops">
+					<img src="/static/img/Artboard 3.png" alt="" >
+					<a href="/registrotienda/">negocio local</a>
+					<form action="/formularioproducto/" method="GET">
+					 <input type="hidden" name='imag' value='Pollo'/>
+					 <input type="hidden" name='idpedido' value={{request.id}}/>
+
+					</form>
+		   </div>
+      </div>    
+  </div>
+  </body>

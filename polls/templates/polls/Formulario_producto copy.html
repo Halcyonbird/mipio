@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+   
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <title>Mipio.app</title>
+   <!--BOOTSTRAP 4-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!--CUSTOM CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Formulario_pedido.css' %}">
+	
+    <script src="/static/js/jquery-3.2.1.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/bootstrap-input-spinner.js"></script>
+	
+  
+</head>
+<body>
+
+  <div class="wrap">
+		<h1>Haz tu pedido</h1>
+		<div class="store-wrapper">
+			
+			<section class="products-list">
+				<div class="product-item" category="laptops">
+				    {% if request.GET.imag == 'Pollo' %}         
+                     <img src="/static/img/pollo.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Pechuga' %}         
+                     <img src="/static/img/pechuga.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Pernil' %}         
+                     <img src="/static/img/Pernil.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Alas' %}         
+                     <img src="/static/img/ala.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Menudencias' %}         
+                     <img src="/static/img/MD.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Colombinas' %}         
+                     <img src="/static/img/Colombina.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Corazones' %}         
+                     <img src="/static/img/corazon.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Cuadritos' %}         
+                     <img src="/static/img/Cuadrito.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Rabadillas' %}         
+                     <img src="/static/img/rabadilla.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Mollejas' %}         
+                     <img src="/static/img/mollejas.png" alt="" >               
+                    {% endif %}
+					{% if request.GET.imag == 'Patas' %}         
+                     <img src="/static/img/patas.png" alt="" >               
+                    {% endif %}
+                    
+					 <a>Pollo entero</a>
+                     <form  id="lineapedidoForm" action="/guardarproducto/" method="POST">{% csrf_token %}
+                         <input type="hidden" class="form-control" name="cliente" id="cliente_id" value={{ user.id }} required>
+                         <input type="hidden" class="form-control" name="producto" id="producto_id" value={{ request.GET.imag }} required>
+                         <input type="hidden" class="form-control" name="estado" id="estado_id" value='Por confirmar' required>
+
+                         {{form.cantidad}}
+
+                         <label for="tipo">Seleccione medida:</label>
+                         <select name="tipo" id="cars">
+                         <option value="Libras">Libras</option>
+                         <option value="Unidades">Unidades</option>                   
+                         </select>
+              
+                          
+                      
+					       <button type="submit" id="agregar" >Submit</button>
+				    </form>
+				</div>
+
+				
+
+			</section>
+		</div>
+	</div>
+  <script>
+        $("input[type='number']").inputSpinner()
+  </script>
+  
+       
+  
+  
+
+    
+ {% bootstrap_javascript jquery='full' %}
+</body>
+{% endblock %}
+</html>
