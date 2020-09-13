@@ -1,0 +1,24 @@
+body{
+	background: rgb(237,241,248);
+    color: rgb(0, 0, 0);
+    font-family: 'Open Sans', sans-serif;
+    
+}
+.container{
+	max-width: 1100px;
+	width: 90%;
+	margin: auto;
+}
+
+.container > h2{
+	color: rgb(102, 95, 95);
+	font-weight: 400;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin: 15px 0px;
+}
+
+#carrito {
+	color: blanchedalmond;
+}
