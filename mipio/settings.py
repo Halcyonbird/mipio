@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vhqhhc8^o93c=(n-_lmsfv+43l4*06pg54av&9o0^@n8^1uaft'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['mipioapp.herokuapp.com']
 
